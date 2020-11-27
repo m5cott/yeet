@@ -9,8 +9,8 @@
 
 gitcf=`ls .config`
 gitlf=`ls .local`
-localcf="$HOME/.config/"
-locallf="$HOME/.local/"
+localcf="$HOME/.config"
+locallf="$HOME/.local"
 
 # Clone dotfiles
 git clone https://github.com/m5cott/plebrice && cd plebrice
@@ -18,9 +18,11 @@ git clone https://github.com/m5cott/plebrice && cd plebrice
 mv -v .profile ~/ && mv -v .zprofile ~/
 
 for cfitem in $gitcf; do
-    mv cfitem $localcf
+    [ ! -d $localcf/$cfitem ] && mkdir -vp $localcf/$cfitem || echo "$localcf/$cfitem already exists."
+    cp -Rn $cfitem $localcf/
 done
 
 for lfitem in $gitlf; do
-    mv lfitem $locallf
+    [ ! -d $locallf/$lfitem ] && mkdir -vp $locallf/$lfitem || echo "$locallf/$lfitem already exists."
+    cp -Rn $lfitem $locallf/
 done

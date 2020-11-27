@@ -63,6 +63,13 @@ cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
 cd $HOME/.local/src && git clone https://github.com/pop-os/shell
 cd shell && make local-install
 
+# lf - terminal file manager
+curl -L https://github.com/gokcehan/lf/releases/latest/download/lf-linux-amd64.tar.gz | tar xzC ~/.local/bin
+mkdir -vp $HOME/.config/lf
+curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/lf/lfrc -o $HOME/.config/lf/lfrc
+curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.local/bin/lf-select -o $HOME/.local/bin/lf-select
+chmod +x $HOME/.local/bin/lf-select $HOME/.local/bin/rotdir
+
 # youtube-dl
 $priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 $priv chmod a+rx /usr/local/bin/youtube-dl
