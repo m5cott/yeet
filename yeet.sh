@@ -9,7 +9,7 @@
 
 # Global Variables
 priv="sudo"
-file="applications"
+file="https://raw.githubusercontent.com/m5cott/yeet/main/applications"
 
 function install {
     which $1 &> /dev/null
