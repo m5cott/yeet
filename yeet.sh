@@ -51,8 +51,8 @@ $priv snap connect qemu-virgil:raw-usb
 $priv snap connect qemu-virgil:removable-media
 
 # Setting up home dir and dotfiles
-curl -LO https://raw.githubusercontent.com/m5cott/yeet/main/plebrice.sh
-chmod +x plebrice.sh && ./plebrice.sh
+mkdir -vp $HOME/.local/bin
+./plebrice.sh
 
 # Quickemu
 mkdir -vp $HOME/.local/src

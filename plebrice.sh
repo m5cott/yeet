@@ -7,13 +7,13 @@
 # License: MIT License
 ##########################################################
 
+# Clone dotfiles
+git clone https://github.com/m5cott/plebrice && cd plebrice
+
 gitcf=`ls .config`
 gitlf=`ls .local`
 localcf="$HOME/.config"
 locallf="$HOME/.local"
-
-# Clone dotfiles
-git clone https://github.com/m5cott/plebrice && cd plebrice
 
 mv -v .profile ~/ && mv -v .zprofile ~/
 
