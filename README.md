@@ -5,6 +5,6 @@ Setup script(s) for ubuntu based systems that use plebrice dotfiles.
 
 For ubuntu based systems:
 ```
-wget https://raw.githubusercontent.com/m5cott/yeet/main/yeet.sh
-chmod +x yeet.sh && ./yeet.sh
+wget https://github.com/m5cott/yeet/archive/main.zip
+unzip main.zip &&  cd yeet-main && ./yeet.sh
 ```
