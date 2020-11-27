@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ##########################################################
 # Name: yeet.sh
 # Purpose: One stop shop to setting up an ubuntu system
@@ -9,7 +9,9 @@
 
 # Global Variables
 priv="sudo"
-file="https://raw.githubusercontent.com/m5cott/yeet/main/applications"
+file="applications"
+
+wget https://raw.githubusercontent.com/m5cott/yeet/main/applications
 
 function install {
     which $1 &> /dev/null
