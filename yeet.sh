@@ -69,9 +69,13 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/lf/l
 curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.local/bin/lf-select -o $HOME/.local/bin/lf-select
 chmod +x $HOME/.local/bin/lf-select $HOME/.local/bin/rotdir
 
+# zsh shell config
+mkdir -vp $HOME/.cache/zsh
+chsh -s $(which zsh)
+
 # youtube-dl
-$priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-$priv chmod a+rx /usr/local/bin/youtube-dl
+#$priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+#$priv chmod a+rx /usr/local/bin/youtube-dl
 
 # Cascadia Code PL (Work in Progress)
 #wget https://github.com/microsoft/cascadia-code/releases/download/v2009.22/CascadiaCode-2009.22.zip
