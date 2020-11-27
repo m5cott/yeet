@@ -11,22 +11,19 @@
 priv="sudo"
 file="applications"
 
-wget https://raw.githubusercontent.com/m5cott/yeet/main/applications
+# update and upgrade system
+$priv apt update && $priv apt upgrade -y
 
 function install {
     which $1 &> /dev/null
 
     if [ $? -ne 0 ]; then
         echo "Installing: ${1}..."
-        $priv apt install $1
+        $priv apt install $1 -y
     else
         echo "Already installed: ${1}"
     fi
 }
-
-# Check if user is sudo
-echo "Please enter your password to continue"
-[ "$UID" -eq 0 ] || exec $priv "$0" "$@"
 
 # Installing Packages from Main Repo
 while IFS= read -r line
