@@ -21,7 +21,6 @@ bridge-utils
 deluge
 node-typescript
 zsync
-zfsutils-linux
 zathura
 mpv
 xclip

@@ -69,6 +69,9 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/lf/l
 curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.local/bin/lf-select -o $HOME/.local/bin/lf-select
 chmod +x $HOME/.local/bin/lf-select $HOME/.local/bin/rotdir
 
+# make zshenv read from new .zshrc location
+echo 'export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' >/dev/null | sudo tee -a /etc/zsh/zshenv
+
 # zsh shell config
 mkdir -vp $HOME/.cache/zsh
 chsh -s $(which zsh)
