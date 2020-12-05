@@ -69,6 +69,10 @@ cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
 cd $HOME/.local/src && git clone https://github.com/pop-os/shell
 cd shell && make local-install
 
+# Gogh Gnome Terminal Color Schemes
+cd $HOME/.local/src && git clone https://github.com/Mayccoll/Gogh.git gogh
+cd gogh/themes && ./gruvbox-dark.sh
+
 # lf - terminal file manager
 curl -L https://github.com/gokcehan/lf/releases/latest/download/lf-linux-amd64.tar.gz | tar xzC ~/.local/bin
 mkdir -vp $HOME/.config/lf
