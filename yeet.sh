@@ -80,11 +80,12 @@ curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/lf/l
 curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.local/bin/lf-select -o $HOME/.local/bin/lf-select
 chmod +x $HOME/.local/bin/lf-select $HOME/.local/bin/rotdir
 
+# youtube-dl
+$priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+$priv chmod a+rx /usr/local/bin/youtube-dl
+$priv ln -s /usr/bin/python3 /usr/bin/python
+
 # TO DO...
 # 1. clean up not needed dotfiles and directories in the home folder
 # 2. move bash files to .config/bash like directory in case user wanted to revert back to bash
 # 3. more to come...
-
-# youtube-dl
-#$priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-#$priv chmod a+rx /usr/local/bin/youtube-dl
