@@ -28,3 +28,6 @@ for lfitem in $lslf; do
     [ ! -d $locallf/$lfitem ] && mkdir -vp $locallf/$lfitem || echo "$locallf/$lfitem already exists."
     cp -Rn $gitlf/$lfitem $locallf/
 done
+
+# misc folder setup
+mkdir -vp $HOME/.cache/wget
