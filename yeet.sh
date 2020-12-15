@@ -64,6 +64,7 @@ chsh -s $(which zsh)
 # Quickemu
 mkdir -vp $HOME/.local/src
 cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
+ln -s $HOME/.local/src/quickemu/quickemu $HOME/.local/bin/
 
 # Pop Shell
 cd $HOME/.local/src && git clone https://github.com/pop-os/shell
@@ -85,7 +86,15 @@ $priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/yo
 $priv chmod a+rx /usr/local/bin/youtube-dl
 $priv ln -s /usr/bin/python3 /usr/bin/python
 
+# clean up
+## bash
+mkdir -vp $HOME/.config/bash
+mv -v $HOME/.bash* $HOME/.config/bash/
+
+## wget
+mv $HOME/.wget-hsts $HOME/.cache/wget/wget-hsts
+
+## remove downloaded yeet repo
+rm -rf $HOME/yeet-main && rm main.zip
+
 # TO DO...
-# 1. clean up not needed dotfiles and directories in the home folder
-# 2. move bash files to .config/bash like directory in case user wanted to revert back to bash
-# 3. more to come...
