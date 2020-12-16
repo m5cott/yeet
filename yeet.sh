@@ -10,6 +10,7 @@
 # Global Variables
 priv="sudo"
 file="applications"
+distro=`lsb_release -is`
 
 # update and upgrade system
 $priv apt update && $priv apt upgrade -y
@@ -43,13 +44,6 @@ $priv usermod -aG libvirt $USER
 $priv usermod -aG libvirt-qemu $USER
 $priv usermod -aG libvirt-dnsmasq $USER
 
-# Snaps
-$priv snap install qemu-virgil --edge
-$priv snap connect qemu-virgil:audio-record
-$priv snap connect qemu-virgil:kvm
-$priv snap connect qemu-virgil:raw-usb
-$priv snap connect qemu-virgil:removable-media
-
 # Setting up home dir and dotfiles
 mkdir -vp $HOME/.local/bin
 ./plebrice.sh
@@ -61,14 +55,26 @@ echo 'export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' | sudo tee -a /etc
 mkdir -vp $HOME/.cache/zsh
 chsh -s $(which zsh)
 
-# Quickemu
-mkdir -vp $HOME/.local/src
-cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
-ln -s $HOME/.local/src/quickemu/quickemu $HOME/.local/bin/
+# Qemu Virgil, Quickemu && Pop Shell setup on Ubuntu 20.04+
+if [ $distro = "Ubuntu" ]; then
 
-# Pop Shell
-cd $HOME/.local/src && git clone https://github.com/pop-os/shell
-cd shell && make local-install
+    # Qemu Virgil Snap
+    $priv snap install qemu-virgil --edge
+    $priv snap connect qemu-virgil:audio-record
+    $priv snap connect qemu-virgil:kvm
+    $priv snap connect qemu-virgil:raw-usb
+    $priv snap connect qemu-virgil:removable-media
+
+    # Pop Shell
+    cd $HOME/.local/src && git clone https://github.com/pop-os/shell
+    cd shell && make local-install
+
+    # Quickemu
+    mkdir -vp $HOME/.local/src
+    cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
+    ln -s $HOME/.local/src/quickemu/quickemu $HOME/.local/bin/
+
+fi
 
 # Gogh Gnome Terminal Color Schemes
 cd $HOME/.local/src && git clone https://github.com/Mayccoll/Gogh.git gogh
@@ -95,6 +101,7 @@ mv -v $HOME/.bash* $HOME/.config/bash/
 mv $HOME/.wget-hsts $HOME/.cache/wget/wget-hsts
 
 ## remove downloaded yeet repo
-rm -rf $HOME/yeet-main && rm main.zip
+cd $HOME
+rm -rf yeet-main && rm main.zip
 
 # TO DO...
