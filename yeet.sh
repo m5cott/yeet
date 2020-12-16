@@ -11,6 +11,7 @@
 priv="sudo"
 file="applications"
 distro=`lsb_release -is`
+ufw=`$priv ufw status | cut -d ' ' -f 2`
 
 # update and upgrade system
 $priv apt update && $priv apt upgrade -y
@@ -33,10 +34,12 @@ do
 done <"$file"
 
 # Basic Firewall setup with ufw
-$priv ufw default deny incoming
-$priv ufw default allow outgoing
-$priv ufw logging on
-$priv ufw enable
+if [ $ufw != "active" ]; then
+    $priv ufw default deny incoming
+    $priv ufw default allow outgoing
+    $priv ufw logging on
+    $priv ufw enable
+fi
 
 # Adding VM groups to current user
 $priv usermod -aG kvm $USER
@@ -90,7 +93,9 @@ chmod +x $HOME/.local/bin/lf-select $HOME/.local/bin/rotdir
 # youtube-dl
 $priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 $priv chmod a+rx /usr/local/bin/youtube-dl
-$priv ln -s /usr/bin/python3 /usr/bin/python
+if [ $distro = "Ubuntu" ]; then
+    $priv ln -s /usr/bin/python3 /usr/bin/python
+fi
 
 # clean up
 ## bash
