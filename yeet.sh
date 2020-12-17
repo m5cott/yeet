@@ -96,6 +96,9 @@ $priv chmod a+rx /usr/local/bin/youtube-dl
 if [ $distro = "Ubuntu" ]; then
     $priv ln -s /usr/bin/python3 /usr/bin/python
 fi
+if [ $distro = "Debian" ]; then
+    $priv ln -s /usr/bin/python3 /usr/bin/python
+fi
 
 # Debian Debloater
 if [ $distro = "Debian" ]; then
