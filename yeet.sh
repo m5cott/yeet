@@ -11,7 +11,6 @@
 priv="sudo"
 file="applications"
 distro=`lsb_release -is`
-ufw=`sudo ufw status | cut -d ' ' -f 2`
 
 # update and upgrade system
 $priv apt update && $priv apt upgrade -y
@@ -34,6 +33,7 @@ do
 done <"$file"
 
 # Basic Firewall setup with ufw
+ufw=`sudo ufw status | cut -d ' ' -f 2`
 if [ $ufw != "active" ]; then
     $priv ufw default deny incoming
     $priv ufw default allow outgoing
