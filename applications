@@ -31,3 +31,4 @@ highlight
 cifs-utils
 transmission
 ufw
+uuid-runtime
