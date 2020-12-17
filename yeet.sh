@@ -49,7 +49,7 @@ $priv usermod -aG libvirt-dnsmasq $USER
 
 # Setting up home dir and dotfiles
 mkdir -vp $HOME/.local/bin
-./plebrice.sh
+$HOME/yeet-main/./plebrice.sh
 
 # make zshenv read from new .zshrc location
 echo 'export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' | sudo tee -a /etc/zsh/zshenv
@@ -95,6 +95,11 @@ $priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/yo
 $priv chmod a+rx /usr/local/bin/youtube-dl
 if [ $distro = "Ubuntu" ]; then
     $priv ln -s /usr/bin/python3 /usr/bin/python
+fi
+
+# Debian Debloater
+if [ $distro = "Debian" ]; then
+    $HOME/yeet-main/./debloater.sh
 fi
 
 # clean up
