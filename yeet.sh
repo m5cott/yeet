@@ -11,7 +11,7 @@
 priv="sudo"
 file="applications"
 distro=`lsb_release -is`
-ufw=`$priv ufw status | cut -d ' ' -f 2`
+ufw=`sudo ufw status | cut -d ' ' -f 2`
 
 # update and upgrade system
 $priv apt update && $priv apt upgrade -y
@@ -48,7 +48,7 @@ $priv usermod -aG libvirt-qemu $USER
 $priv usermod -aG libvirt-dnsmasq $USER
 
 # Setting up home dir and dotfiles
-mkdir -vp $HOME/.local/bin
+mkdir -vp $HOME/.local/bin $HOME/.local/src
 $HOME/yeet-main/./plebrice.sh
 
 # make zshenv read from new .zshrc location

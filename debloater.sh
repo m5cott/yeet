@@ -1,6 +1,6 @@
 #!/bin/sh
 
-$distro=`lsb_release -is`
+distro=`lsb_release -is`
 
 if [ $distro = "Debian" ]; then
     echo "Removing some bloat..."
@@ -11,7 +11,7 @@ if [ $distro = "Debian" ]; then
     five-or-more hitori iagno gnome-klotski lightsoff gnome-mahjongg \
     gnome-mines gnome-nibbles quadrapassel four-in-a-row gnome-robots \
     gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex \
-    gnome-games -yy
+    gnome-games -y
 
     echo "Gnome is starting to feel lighter..."
     echo "let's get rid of some more."
@@ -20,13 +20,13 @@ if [ $distro = "Debian" ]; then
     sudo apt remove --purge cheese libreoffice-gnome libreoffice-impress \
     libreoffice-writer gnome-clocks gnome-documents gnome-maps gnome-music \
     gnome-sound-recorder gnome-todo shotwell polari gnome-remote-desktop
-    empathy vino vinagre -yy
+    empathy vino vinagre -y
 
     echo "WOW that feels better."
     echo "...gonna clean up the rest."
     sleep 1.5
 
-    sudo apt autoremove && sudo apt autoclean
+    sudo apt autoremove -y && sudo apt autoclean
 else
     echo "Sorry, this application is only for Debian with a standard Gnome \
     install."
