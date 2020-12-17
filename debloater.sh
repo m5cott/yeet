@@ -19,8 +19,9 @@ if [ $distro = "Debian" ]; then
 
     sudo apt remove --purge cheese libreoffice-gnome libreoffice-impress \
     libreoffice-writer gnome-clocks gnome-documents gnome-maps gnome-music \
-    gnome-sound-recorder gnome-todo shotwell polari gnome-remote-desktop
-    empathy vino vinagre -y
+    gnome-sound-recorder gnome-todo shotwell polari gnome-remote-desktop \
+    empathy vino vinagre libreoffice-calc libreoffice-common \
+    libreoffice-core evolution -y
 
     echo "WOW that feels better."
     echo "...gonna clean up the rest."
