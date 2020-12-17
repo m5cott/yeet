@@ -60,7 +60,6 @@ chsh -s $(which zsh)
 
 # Qemu Virgil, Quickemu && Pop Shell setup on Ubuntu 20.04+
 if [ $distro = "Ubuntu" ]; then
-
     # Qemu Virgil Snap
     $priv snap install qemu-virgil --edge
     $priv snap connect qemu-virgil:audio-record
@@ -68,20 +67,29 @@ if [ $distro = "Ubuntu" ]; then
     $priv snap connect qemu-virgil:raw-usb
     $priv snap connect qemu-virgil:removable-media
 
-    # Pop Shell
-    cd $HOME/.local/src && git clone https://github.com/pop-os/shell
-    cd shell && make local-install
-
     # Quickemu
     mkdir -vp $HOME/.local/src
     cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
     ln -s $HOME/.local/src/quickemu/quickemu $HOME/.local/bin/
 
+    if [ $XDG_CURRENT_DESKTOP = "ubuntu:GNOME" ]; then
+        # Pop Shell
+        cd $HOME/.local/src && git clone https://github.com/pop-os/shell
+        cd shell && make local-install
+    fi
+fi
+
+if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then
+    # Pop Shell
+    cd $HOME/.local/src && git clone https://github.com/pop-os/shell
+    cd shell && make local-install
 fi
 
 # Gogh Gnome Terminal Color Schemes
-cd $HOME/.local/src && git clone https://github.com/Mayccoll/Gogh.git gogh
-cd gogh/themes && ./gruvbox-dark.sh
+if [ `echo $(which gnome-terminal) | cut -d '/' -f 4` = "gnome-terminal" ]; then
+    cd $HOME/.local/src && git clone https://github.com/Mayccoll/Gogh.git gogh
+    cd gogh/themes && ./gruvbox-dark.sh
+fi
 
 # lf - terminal file manager
 curl -L https://github.com/gokcehan/lf/releases/latest/download/lf-linux-amd64.tar.gz | tar xzC ~/.local/bin
