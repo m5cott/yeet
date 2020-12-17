@@ -1,6 +1,5 @@
 curl
 git
-git-core
 build-essential
 unzip
 unrar
@@ -18,7 +17,6 @@ qemu-kvm
 libvirt-clients
 libvirt-daemon-system
 bridge-utils
-deluge
 node-typescript
 zsync
 zathura
@@ -31,3 +29,4 @@ fzf
 newsboat
 highlight
 cifs-utils
+transmission
