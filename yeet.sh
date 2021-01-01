@@ -67,12 +67,18 @@ if [ $distro = "Ubuntu" ]; then
     $priv snap connect qemu-virgil:raw-usb
     $priv snap connect qemu-virgil:removable-media
 
+    if [ "$(ls -A "/sys/class/power_supply")" ]; then
+        $priv snap install auto-cpufreq
+        $priv auto-cpufreq --install
+    fi
+
     # Quickemu
     mkdir -vp $HOME/.local/src
     cd $HOME/.local/src && git clone https://github.com/wimpysworld/quickemu.git
     ln -s $HOME/.local/src/quickemu/quickemu $HOME/.local/bin/
 
     if [ $XDG_CURRENT_DESKTOP = "ubuntu:GNOME" ]; then
+        $priv apt install gnome-tweaks node-typescript -y
         # Pop Shell
         cd $HOME/.local/src && git clone https://github.com/pop-os/shell
         cd shell && make local-install
@@ -80,6 +86,7 @@ if [ $distro = "Ubuntu" ]; then
 fi
 
 if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then
+    $priv apt install gnome-tweaks node-typescript -y
     # Pop Shell
     cd $HOME/.local/src && git clone https://github.com/pop-os/shell
     cd shell && make local-install
@@ -112,6 +119,15 @@ fi
 if [ $distro = "Debian" ]; then
     $HOME/yeet-main/./debloater.sh
 fi
+
+read -p "Install minecraft (y/n)?" decide
+case $decide in
+    [yY])   wget "https://launcher.mojang.com/download/Minecraft.deb" && \
+            $priv dpkg -i Minecraft.deb && $priv apt install -f && \
+            $priv install openjdk-8-jdk && rm Minecraft.deb exit;;
+    [nN])   exit;;
+    * )     echo "Invalid input." && exit;;
+esac
 
 # clean up
 ## bash

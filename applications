@@ -9,7 +9,6 @@ zsh-autosuggestions
 zsh-syntax-highlighting
 pylint
 python-pip-whl
-gnome-tweaks
 ffmpeg
 qemu
 qemu-utils
@@ -17,7 +16,6 @@ qemu-kvm
 libvirt-clients
 libvirt-daemon-system
 bridge-utils
-node-typescript
 zsync
 zathura
 mpv
@@ -29,6 +27,6 @@ fzf
 newsboat
 highlight
 cifs-utils
-transmission
+deluge
 ufw
 uuid-runtime
