@@ -120,11 +120,20 @@ if [ $distro = "Debian" ]; then
     $HOME/yeet-main/./debloater.sh
 fi
 
-read -p "Install minecraft (y/n)?" decide
+# Minecraft
+read -p "Install minecraft (y/n)? " decide
 case $decide in
     [yY])   wget "https://launcher.mojang.com/download/Minecraft.deb" && \
             $priv dpkg -i Minecraft.deb ; $priv apt install -f -y && \
             $priv apt install openjdk-8-jdk -y && rm Minecraft.deb exit;;
+    [nN])   exit;;
+    * )     echo "Invalid input." && exit;;
+esac
+
+# VS Code
+read -p "Install VS code (y/n)? " vscode
+case $vscode in
+    [yY])   wget -O code.deb --referer https://code.visualstudio.com 'https://go.microsoft.com/fwlink/?LinkID=760868' && $priv dpkg -i code.deb && rm code.deb exit;;
     [nN])   exit;;
     * )     echo "Invalid input." && exit;;
 esac
