@@ -100,7 +100,7 @@ if [ $distro = "Ubuntu" ]; then
 fi
 
 # Debian Gnome Snapd and Pop Shell extension install
-if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then  
+if [ $distro = "Debian" ]; then  
     if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then
         $priv apt install gnome-tweaks node-typescript snapd -y
         
