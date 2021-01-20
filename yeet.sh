@@ -98,13 +98,6 @@ if [ `echo $(which gnome-terminal) | cut -d '/' -f 4` = "gnome-terminal" ]; then
     cd gogh/themes && ./gruvbox-dark.sh
 fi
 
-# lf - terminal file manager
-curl -L https://github.com/gokcehan/lf/releases/latest/download/lf-linux-amd64.tar.gz | tar xzC ~/.local/bin
-mkdir -vp $HOME/.config/lf
-curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.config/lf/lfrc -o $HOME/.config/lf/lfrc
-curl https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.local/bin/lf-select -o $HOME/.local/bin/lf-select
-chmod +x $HOME/.local/bin/lf-select $HOME/.local/bin/rotdir
-
 # youtube-dl
 $priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 $priv chmod a+rx /usr/local/bin/youtube-dl
@@ -129,6 +122,15 @@ case $decide in
     [nN])   exit;;
     * )     echo "Invalid input." && exit;;
 esac
+
+# Telegram
+read -p "Install Telegram Desktop (y/n)? " tgram
+case $tgram in
+    [yY])   wget -O telegram.tar.xz --referer https://desktop.telegram.org \
+            'https://telegram.org/dl/desktop/linux' && tar -xf telegram.tar.xz \
+            && $priv mv Telegram /opt/ ;;
+    [nN])   exit;;
+    * )     echo "Invalid input." && exit;;
 
 # VS Code
 read -p "Install VS code (y/n)? " vscode
