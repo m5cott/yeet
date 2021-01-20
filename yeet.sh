@@ -135,7 +135,9 @@ case $tgram in
 # VS Code
 read -p "Install VS code (y/n)? " vscode
 case $vscode in
-    [yY])   wget -O code.deb --referer https://code.visualstudio.com 'https://go.microsoft.com/fwlink/?LinkID=760868' && $priv dpkg -i code.deb && rm code.deb exit;;
+    [yY])   wget -O code.deb --referer https://code.visualstudio.com \
+            'https://go.microsoft.com/fwlink/?LinkID=760868' \
+            && $priv dpkg -i code.deb && rm code.deb exit;;
     [nN])   exit;;
     * )     echo "Invalid input." && exit;;
 esac
