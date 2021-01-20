@@ -12,6 +12,19 @@ priv="sudo"
 file="applications"
 distro=`lsb_release -is`
 
+echo "Thank you for using my script!"
+echo "Loading script..."
+sleep 1.5
+
+# Gogh themes won't install unless a custom profile has been made.
+# The profile can have any name.
+read -p "Have you created a custom terminal profile? (y/n) " begin
+case $begin in
+    [yY])   echo "Awesome! Starting script" ; sleep 1.5;;    
+    [nN])   echo "Exiting script..." ; sleep 1.5; exit 1;;
+    * )     echo "Invalid input"; sleep 1.5; exit 1;
+esac
+
 # update and upgrade system
 $priv apt update && $priv apt upgrade -y
 
@@ -52,7 +65,8 @@ mkdir -vp $HOME/.local/bin $HOME/.local/src
 $HOME/yeet-main/./plebrice.sh
 
 # make zshenv read from new .zshrc location
-echo 'export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' | sudo tee -a /etc/zsh/zshenv
+echo 'export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"' | \
+sudo tee -a /etc/zsh/zshenv
 
 # zsh shell config
 mkdir -vp $HOME/.cache/zsh
@@ -85,11 +99,23 @@ if [ $distro = "Ubuntu" ]; then
     fi
 fi
 
-if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then
-    $priv apt install gnome-tweaks node-typescript -y
-    # Pop Shell
-    cd $HOME/.local/src && git clone https://github.com/pop-os/shell
-    cd shell && make local-install
+# Debian Gnome Snapd and Pop Shell extension install
+if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then  
+    if [ $XDG_CURRENT_DESKTOP = "GNOME" ]; then
+        $priv apt install gnome-tweaks node-typescript snapd -y
+        
+        # Snaps
+        $priv snap install core
+        $priv snap install qemu-virgil --edge
+        $priv snap connect qemu-virgil:audio-record
+        $priv snap connect qemu-virgil:kvm
+        $priv snap connect qemu-virgil:raw-usb
+        $priv snap connect qemu-virgil:removable-media
+        
+        # Pop Shell
+        cd $HOME/.local/src && git clone https://github.com/pop-os/shell
+        cd shell && make local-install
+    fi
 fi
 
 # Gogh Gnome Terminal Color Schemes
@@ -99,7 +125,8 @@ if [ `echo $(which gnome-terminal) | cut -d '/' -f 4` = "gnome-terminal" ]; then
 fi
 
 # youtube-dl
-$priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+$priv curl -L https://yt-dl.org/downloads/latest/youtube-dl -o \
+/usr/local/bin/youtube-dl
 $priv chmod a+rx /usr/local/bin/youtube-dl
 if [ $distro = "Ubuntu" ]; then
     $priv ln -s /usr/bin/python3 /usr/bin/python
@@ -118,7 +145,7 @@ read -p "Install minecraft (y/n)? " decide
 case $decide in
     [yY])   wget "https://launcher.mojang.com/download/Minecraft.deb" && \
             $priv dpkg -i Minecraft.deb ; $priv apt install -f -y && \
-            $priv apt install openjdk-8-jdk -y && rm Minecraft.deb exit;;
+            $priv apt install openjdk-8-jdk -y && rm Minecraft.deb;;
     [nN])   exit;;
     * )     echo "Invalid input." && exit;;
 esac
@@ -137,7 +164,7 @@ read -p "Install VS code (y/n)? " vscode
 case $vscode in
     [yY])   wget -O code.deb --referer https://code.visualstudio.com \
             'https://go.microsoft.com/fwlink/?LinkID=760868' \
-            && $priv dpkg -i code.deb && rm code.deb exit;;
+            && $priv dpkg -i code.deb && rm code.deb;;
     [nN])   exit;;
     * )     echo "Invalid input." && exit;;
 esac
